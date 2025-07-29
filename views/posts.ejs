@@ -1,0 +1,38 @@
+<%- include("partials/header.ejs") %>
+
+<div class="container my-5">
+  <div class="row align-items-center">
+
+    <% if (posts.length === 0) { %>
+      <p>There are no posts available.</p>
+    <% } else { %>
+      <div class="col-md-6">
+        <h2>Explore Our Latest Stories</h2>
+        <% posts.forEach(post => { %>
+          <div class="card mb-3">
+            <div class="card-body">
+              <h3 class="card-title"><%= post.title %></h3>
+
+              <% if (post.content.length <= 75) { %>
+                <p class="card-text"><%= post.content %></p>
+              <% } else { %>
+                <p class="card-text">
+                  <%= post.content.substring(0, 75) %>...
+                  <a href="/posts/<%= encodeURIComponent(post.title) %>" class="btn btn-sm btn-outline-primary">Read more</a>
+                </p>
+                <p class="text-muted small"><%= new Date(post.date).toLocaleString() %></p>
+              <% } %>
+            </div>
+          </div>
+        <% }); %>
+      </div>
+<% } %>
+     <div class="position-fixed-image">
+  <img src="/images/flower.png" alt="flower" />
+</div>
+    
+
+  </div>
+</div>
+
+<%- include("partials/footer.ejs") %>
